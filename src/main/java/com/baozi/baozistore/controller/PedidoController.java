@@ -32,12 +32,12 @@ public class PedidoController {
     @PostMapping
     public ResponseEntity<Pedido> criar(@RequestBody Pedido pedido) {
         if (pedido.getCliente() == null || pedido.getCliente().getId() == null
-                || pedido.getProdutoId() == null || pedido.getProdutoId().getId() == null) {
+                || pedido.getProduto() == null || pedido.getProduto().getId() == null) {
             return ResponseEntity.badRequest().build();
         }
 
         Optional<Cliente> cliente = clienteRepository.findById(pedido.getCliente().getId());
-        Optional<Produto> produto = produtoRepository.findById(pedido.getProdutoId().getId());
+        Optional<Produto> produto = produtoRepository.findById(pedido.getProduto().getId());
 
         if (cliente.isEmpty() || produto.isEmpty()) {
             return ResponseEntity.badRequest().build();
@@ -45,7 +45,7 @@ public class PedidoController {
 
         pedido.setId(null);
         pedido.setCliente(cliente.get());
-        pedido.setProdutoId(produto.get());
+        pedido.setProduto(produto.get());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoRepository.save(pedido));
     }

@@ -21,7 +21,7 @@ public class Pedido {
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "produto_id")
-	private Produto produtoId;
+	private Produto produto;
 	
 	private Integer quantidade;
 
@@ -33,12 +33,12 @@ public class Pedido {
 		this.quantidade = quantidade;
 	}
 
-	public Produto getProdutoId() {
-		return produtoId;
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setProdutoId(Produto produtoId) {
-		this.produtoId = produtoId;
+	public void setProduto(Produto produtoId) {
+		this.produto = produtoId;
 	}
 
 	public Cliente getCliente() {
